@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "76474599090",
+    "firebase_url": "https://hex-project-b25a2.firebaseio.com",
+    "project_id": "hex-project-b25a2",
+    "storage_bucket": "hex-project-b25a2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:76474599090:android:0f165a7181494a19bd6bab",
+        "android_client_info": {
+          "package_name": "com.hex.heapradio"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "76474599090-0kf0e2rgtlhihsk56rn46sgn0ja6345k.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBdYYbX35fbqW3uqGtth--4TCZXYFjMnP0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "76474599090-0kf0e2rgtlhihsk56rn46sgn0ja6345k.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="gray">#808080</color>
+    <color name="white">#ffffff</color>
+
+    <!-- Default Theme Color -->
+    <color name="colorAccent">#435161</color>
+    <color name="colorPrimary">#222222</color>
+    <color name="colorPrimaryDark">#000000</color>
+
+    <color name="colorTransparent">#00000000</color>
+    <color name="colorLoader">#28323f</color>
+    <color name="loader_bg">#ffffff</color>
+
+    <!-- Sidebar Top Logo Background Color -->
+    <color name="sidebar_logo_bg">#000000</color>
+
+    <!-- Splash Screen Background Color -->
+    <color name="colorSplash">#393939</color>
+
+    <!-- Notification Player Background Color -->
+    <color name="music_noti_bg">#222222</color>
+
+</resources>

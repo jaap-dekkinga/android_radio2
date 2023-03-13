@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="horizontal"
+    android:background="@color/music_noti_bg">
+        <ImageView
+            android:id="@+id/imageViewAlbumArt"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_marginStart="5dp"
+            android:src="@drawable/player_noti_icon"
+            android:contentDescription="@string/logoImage" />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+            android:gravity="center"
+            android:layout_weight="3"
+            android:orientation="vertical"
+            android:padding="5dp" >
+
+            <TextView
+                android:id="@+id/textSongName"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:selectAllOnFocus="true"
+                android:singleLine="true"
+                android:text="@string/radio_name"
+                android:textColor="@color/white"
+                android:textSize="15sp"
+                android:typeface="normal"
+                tools:text="@string/radio_name" />
+
+            <TextView
+                android:id="@+id/textAlbumName"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:ellipsize="marquee"
+                android:gravity="center_vertical"
+                android:marqueeRepeatLimit="marquee_forever"
+                android:selectAllOnFocus="true"
+                android:singleLine="true"
+                android:text="@string/playingNow"
+                android:textColor="@color/gray"
+                android:textSize="12sp"
+                android:typeface="normal" />
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/btnStop"
+            style="?android:attr/buttonBarButtonStyle"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_marginStart="5dp"
+            android:background="@drawable/ic_pause_white_36dp" />
+
+        <Button
+            android:id="@+id/btnPlay"
+            style="?android:attr/buttonBarButtonStyle"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_marginStart="5dp"
+            android:background="@drawable/ic_play_arrow_white_36dp" />
+
+        <Button
+            android:id="@+id/btnCancel"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="5dp"
+            style="?android:attr/buttonBarButtonStyle"
+            android:background="@drawable/ic_close_white_36dp" />
+
+</LinearLayout>

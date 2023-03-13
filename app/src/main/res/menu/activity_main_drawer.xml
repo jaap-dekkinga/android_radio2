@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group
+        android:checkableBehavior="single">
+        <item android:title="@string/radio_name">
+            <menu>
+                <group
+                    android:id="@+id/first_group"
+                    android:checkableBehavior="single">
+                    <item
+                        android:id="@+id/live_radio"
+                        android:icon="@drawable/ic_iconfinder_radio"
+                        android:title="@string/live_radio" />
+                    <item
+                        android:id="@+id/about_us"
+                        android:icon="@drawable/ic_iconfinder_about"
+                        android:title="@string/about_us" />
+                </group>
+            </menu>
+        </item>
+
+        <item android:title="@string/contact_us_group">
+            <menu>
+                <group
+                    android:id="@+id/second_group"
+                    android:checkableBehavior="single">
+                    <item
+                        android:id="@+id/call_us"
+                        android:icon="@drawable/ic_call"
+                        android:title="@string/call_us" />
+                    <item
+                        android:id="@+id/email"
+                        android:icon="@drawable/ic_email"
+                        android:title="@string/email" />
+                    <item
+                        android:id="@+id/contact_us"
+                        android:icon="@drawable/ic_contact_mail"
+                        android:title="@string/contact_us" />
+                    <item
+                        android:id="@+id/website"
+                        android:icon="@drawable/ic_www"
+                        android:title="@string/website" />
+                </group>
+            </menu>
+        </item>
+        <item android:title="@string/like_and_follow_group">
+            <menu>
+                <group
+                    android:id="@+id/third_group"
+                    android:checkableBehavior="single">
+                    <item
+                        android:id="@+id/facebook"
+                        android:icon="@drawable/ic_iconfinder_facebook"
+                        android:title="@string/facebook" />
+                    <item
+                        android:id="@+id/instagram"
+                        android:icon="@drawable/ic_iconfinder_instagram"
+                        android:title="@string/instagram" />
+                    <item
+                        android:id="@+id/twitter"
+                        android:icon="@drawable/ic_iconfinder_twitter"
+                        android:title="@string/twitter" />
+                    <item
+                        android:id="@+id/youtube"
+                        android:icon="@drawable/ic_iconfinder_youtube"
+                        android:title="@string/youtube" />
+                </group>
+            </menu>
+        </item>
+        <item
+            android:id="@+id/share"
+            android:icon="@drawable/ic_menu_share"
+            android:title="@string/menu_share" />
+        <item
+            android:id="@+id/rate_us"
+            android:icon="@drawable/ic_star_black"
+            android:title="@string/rate_us" />
+        <item
+            android:id="@+id/privacy"
+            android:icon="@drawable/ic_info_black"
+            android:title="@string/privacy" />
+    </group>
+
+</menu>

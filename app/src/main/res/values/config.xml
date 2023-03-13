@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Heap Radio</string>
+    <string name="info_copyright">©2020 Heap Radio</string>
+
+    <!-- Radio stream url -->
+    <string name="radio" translatable="false">http://uk6.internet-radio.com:8332/;stream</string>
+
+    <!-- Set auto play when user opens app [ true / false ] -->
+    <string name="autoPlayOnAppStart">false</string>
+
+    <!-- TODO: change this placeholder text to change custom menu Actions -->
+    <string name="contact_no">+1 234 567 8900</string>
+    <string name="support_email">harry_597@yahoo.com</string>
+    <string name="contact_us_url">https://www.bing.com/</string>
+    <string name="website_url">http://www.bbc.com/culture/music</string>
+    <string name="facebook_url">https://www.facebook.com/</string>
+    <string name="twitter_url">https://twitter.com/login?lang=en</string>
+    <string name="instagram_url">https://www.instagram.com/</string>
+    <string name="youtube_url">https://www.youtube.com/</string>
+
+    <!-- Set show menu options [ true / false ] -->
+    <string name="show_about_us">true</string>
+    <string name="show_share">true</string>
+    <string name="show_rate_app">true</string>
+    <string name="show_privacy">true</string>
+
+    <!-- Set show ads [ true / false ] -->
+    <string name="showAds">true</string>
+    <string name="showSplashAd">true</string>
+    <string name="showBannerAd">true</string>
+
+    <!-- Admob Ad details -->
+    <string name="banner_ad_id">ca-app-pub-3940256099942544/6300978111</string>
+    <string name="interstitial_ad_id">ca-app-pub-3940256099942544/1033173712</string>
+    <string name="ad_app_id">ca-app-pub-3940256099942544~3347511713</string>
+    <string name="ad_pub_id"></string>
+
+    <!-- Admob test device id-->
+    <string name="testDevice">17B17E1A1F22EAB6EC78FEB0C8E15FB5</string>
+
+    <string name="loading">Loading…</string>
+    <string name="logoImage">Logo</string>
+    <string name="playImage">Play Image</string>
+
+    <!-- Radio stream error -->
+    <string name="no_stream">Stream not working!</string>
+
+    <!-- player Notification strings -->
+    <string name="playNotify">Play</string>
+    <string name="stopNotify">Stop</string>
+    <string name="cancelNotify">Cancel</string>
+    <string name="playingNow">Live Streaming..</string>
+
+    <!-- TODO: change this placeholder text to change pages content -->
+    <string name="about_content">
+        <![CDATA[
+    <html>
+    <body style=\"text-align:justify;color:#777;padding:12px;\">
+        <p>
+            Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+            Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s,
+            when an unknown printer took a galley of type and scrambled it to make a type specimen book.
+            It has survived not only five centuries, but also the leap into electronic typesetting,
+            remaining essentially unchanged. It was popularised in the 1960s with the release of
+            Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing
+            software like Aldus PageMaker including versions of Lorem Ipsum.
+        </p>
+        <p>
+            Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+            Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s,
+            when an unknown printer took a galley of type and scrambled it to make a type specimen book.
+            It has survived not only five centuries, but also the leap into electronic typesetting,
+            remaining essentially unchanged. It was popularised in the 1960s with the release of
+            Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing
+            software like Aldus PageMaker including versions of Lorem Ipsum.
+        </p>
+        <p>
+            Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+            Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s,
+            when an unknown printer took a galley of type and scrambled it to make a type specimen book.
+            It has survived not only five centuries, but also the leap into electronic typesetting,
+            remaining essentially unchanged. It was popularised in the 1960s with the release of
+            Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing
+            software like Aldus PageMaker including versions of Lorem Ipsum.
+        </p>
+        <p>
+            Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+            Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s,
+            when an unknown printer took a galley of type and scrambled it to make a type specimen book.
+            It has survived not only five centuries, but also the leap into electronic typesetting,
+            remaining essentially unchanged. It was popularised in the 1960s with the release of
+            Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing
+            software like Aldus PageMaker including versions of Lorem Ipsum.
+        </p>
+        <p>
+            Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+            Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s,
+            when an unknown printer took a galley of type and scrambled it to make a type specimen book.
+            It has survived not only five centuries, but also the leap into electronic typesetting,
+            remaining essentially unchanged. It was popularised in the 1960s with the release of
+            Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing
+            software like Aldus PageMaker including versions of Lorem Ipsum.
+        </p>
+        <p>
+            Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+            Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s,
+            when an unknown printer took a galley of type and scrambled it to make a type specimen book.
+            It has survived not only five centuries, but also the leap into electronic typesetting,
+            remaining essentially unchanged. It was popularised in the 1960s with the release of
+            Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing
+            software like Aldus PageMaker including versions of Lorem Ipsum.
+        </p>
+    </body>
+    </html>
+    ]]>
+    </string>
+    <string name="privacy_content">
+        <![CDATA[
+    <html>
+    <body style=\"text-align:justify;color:#777;padding:12px;\">
+        <p>
+            Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+            Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s,
+            when an unknown printer took a galley of type and scrambled it to make a type specimen book.
+            It has survived not only five centuries, but also the leap into electronic typesetting,
+            remaining essentially unchanged. It was popularised in the 1960s with the release of
+            Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing
+            software like Aldus PageMaker including versions of Lorem Ipsum.
+        </p>
+        <p>
+            Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+            Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s,
+            when an unknown printer took a galley of type and scrambled it to make a type specimen book.
+            It has survived not only five centuries, but also the leap into electronic typesetting,
+            remaining essentially unchanged. It was popularised in the 1960s with the release of
+            Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing
+            software like Aldus PageMaker including versions of Lorem Ipsum.
+        </p>
+        <p>
+            Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+            Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s,
+            when an unknown printer took a galley of type and scrambled it to make a type specimen book.
+            It has survived not only five centuries, but also the leap into electronic typesetting,
+            remaining essentially unchanged. It was popularised in the 1960s with the release of
+            Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing
+            software like Aldus PageMaker including versions of Lorem Ipsum.
+        </p>
+        <p>
+            Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+            Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s,
+            when an unknown printer took a galley of type and scrambled it to make a type specimen book.
+            It has survived not only five centuries, but also the leap into electronic typesetting,
+            remaining essentially unchanged. It was popularised in the 1960s with the release of
+            Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing
+            software like Aldus PageMaker including versions of Lorem Ipsum.
+        </p>
+        <p>
+            Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+            Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s,
+            when an unknown printer took a galley of type and scrambled it to make a type specimen book.
+            It has survived not only five centuries, but also the leap into electronic typesetting,
+            remaining essentially unchanged. It was popularised in the 1960s with the release of
+            Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing
+            software like Aldus PageMaker including versions of Lorem Ipsum.
+        </p>
+        <p>
+            Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+            Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s,
+            when an unknown printer took a galley of type and scrambled it to make a type specimen book.
+            It has survived not only five centuries, but also the leap into electronic typesetting,
+            remaining essentially unchanged. It was popularised in the 1960s with the release of
+            Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing
+            software like Aldus PageMaker including versions of Lorem Ipsum.
+        </p>
+    </body>
+    </html>
+    ]]>
+    </string>
+
+    <!-- Firebase Details -->
+    <string name="firebase_notification_channel_id">416</string>
+    <string name="msg_token_fmt" translatable="false">InstanceID Token: %s</string>
+
+    <!-- TODO: change this placeholder text to change menu title -->
+    <string name="menu_home">Home</string>
+    <string name="radio_name">@string/app_name</string>
+    <string name="live_radio">@string/app_name</string>
+    <string name="about_us">About Us</string>
+    <string name="contact_us_group">Contact Us</string>
+    <string name="call_us">Call Us</string>
+    <string name="email">E-mail</string>
+    <string name="contact_us">Contact Us</string>
+    <string name="website">Website</string>
+    <string name="like_and_follow_group">Like and Follow Us</string>
+    <string name="facebook">Facebook</string>
+    <string name="instagram">Instagram</string>
+    <string name="twitter">Twitter</string>
+    <string name="youtube">Youtube</string>
+    <string name="menu_share">Share App</string>
+    <string name="rate_us">Rate App</string>
+    <string name="privacy">Privacy Policy</string>
+    <string name="menu_gallery">Gallery</string>
+    <string name="menu_slideshow">Slideshow</string>
+    <string name="menu_tools">Tools</string>
+    <string name="communicate">Communicate</string>
+
+    <!-- TODO: change this placeholder text to change activity titles accordingly -->
+    <string-array name="nav_item_activity_titles">
+        <item>@string/live_radio</item>
+        <item>About Us</item>
+        <item><!--Call Us-->@string/live_radio</item>
+        <item><!--E-mail-->@string/live_radio</item>
+        <item>Contact Us</item>
+        <item>Website</item>
+        <item>Facebook</item>
+        <item>Instagram</item>
+        <item>Twitter</item>
+        <item>Youtube</item>
+        <item><!--Share App-->@string/live_radio</item>
+        <item><!--Rate App-->@string/live_radio</item>
+        <item>Privacy Policy</item>
+    </string-array>
+
+</resources>
