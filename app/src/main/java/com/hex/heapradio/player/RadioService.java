@@ -32,6 +32,9 @@ import android.widget.RemoteViews;
 import androidx.annotation.Nullable;
 import androidx.core.app.NotificationCompat;
 
+import com.dekidea.tuneurl.receiver.TuneURLReceiver;
+import com.dekidea.tuneurl.util.Constants;
+import com.dekidea.tuneurl.util.TuneURLManager;
 import com.google.android.exoplayer2.C;
 import com.google.android.exoplayer2.ExoPlaybackException;
 import com.google.android.exoplayer2.ExoPlayerFactory;
@@ -56,7 +59,9 @@ import com.hex.heapradio.R;
 import org.greenrobot.eventbus.EventBus;
 import java.util.Objects;
 
-public class RadioService extends Service implements Player.EventListener, AudioManager.OnAudioFocusChangeListener {
+public class RadioService extends Service implements Player.EventListener,
+        AudioManager.OnAudioFocusChangeListener,
+        Constants {
 
     public static final String ACTION_PLAY = "com.hex.heapradio.player.ACTION_PLAY";
     public static final String ACTION_PAUSE = "com.hex.heapradio.player.ACTION_PAUSE";
@@ -87,6 +92,8 @@ public class RadioService extends Service implements Player.EventListener, Audio
     private String status;
 
     private String streamUrl;
+
+    private TuneURLReceiver tuneURLReceiver;
 
     public class LocalBinder extends Binder {
         public RadioService getService() {
@@ -198,11 +205,15 @@ public class RadioService extends Service implements Player.EventListener, Audio
 
         registerReceiver(becomingNoisyReceiver, new IntentFilter(AudioManager.ACTION_AUDIO_BECOMING_NOISY));
 
+        registerTuneURLReceiver();
+
         status = PlaybackStatus.IDLE;
     }
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
+
+        TuneURLManager.startTuneURLService(getApplicationContext());
 
         String action = intent.getAction();
         if(TextUtils.isEmpty(action))
@@ -261,6 +272,10 @@ public class RadioService extends Service implements Player.EventListener, Audio
     public void onDestroy() {
 
         pause();
+
+        unregisterReceiver(tuneURLReceiver);
+
+        TuneURLManager.stopTuneURLService(getApplicationContext());
 
         exoPlayer.release();
         exoPlayer.removeListener(this);
@@ -395,7 +410,7 @@ public class RadioService extends Service implements Player.EventListener, Audio
 
     }
 
-    public void play(String streamUrl) {
+    public void play(final String streamUrl) {
 
         this.streamUrl = streamUrl;
 
@@ -413,13 +428,19 @@ public class RadioService extends Service implements Player.EventListener, Audio
                 .setExtractorsFactory(new DefaultExtractorsFactory())
                 .createMediaSource(Uri.parse(streamUrl));
         try {
+
             exoPlayer.prepare(mediaSource);
             exoPlayer.setPlayWhenReady(true);
-        } catch (IllegalArgumentException e) {
+
+            TuneURLManager.startScanning(getApplicationContext(), streamUrl, exoPlayer.getCurrentPosition());
+        }
+        catch (IllegalArgumentException e) {
             e.printStackTrace();
-        } catch (SecurityException e) {
+        }
+        catch (SecurityException e) {
             e.printStackTrace();
-        } catch (IllegalStateException e) {
+        }
+        catch (IllegalStateException e) {
             e.printStackTrace();
         }
         NoiseSuppressor ns = NoiseSuppressor.create(exoPlayer.getAudioSessionId());
@@ -439,6 +460,8 @@ public class RadioService extends Service implements Player.EventListener, Audio
 
     public void pause() {
 
+        TuneURLManager.stopScanning(getApplicationContext());
+
         exoPlayer.setPlayWhenReady(false);
 
         audioManager.abandonAudioFocus(this);
@@ -446,6 +469,8 @@ public class RadioService extends Service implements Player.EventListener, Audio
     }
 
     public void stop() {
+
+        TuneURLManager.stopScanning(getApplicationContext());
 
         exoPlayer.stop();
 
@@ -460,8 +485,8 @@ public class RadioService extends Service implements Player.EventListener, Audio
             if(!isPlaying()){
 
                 play(streamUrl);
-
-            } else {
+            }
+            else {
 
                 pause();
             }
@@ -580,5 +605,23 @@ public class RadioService extends Service implements Player.EventListener, Audio
         pause.setAction(RadioService.ACTION_PAUSE);
         PendingIntent pPause = PendingIntent.getService(this, NOTIFICATION_ID, pause, 0);
         view.setOnClickPendingIntent(R.id.btnStop, pPause);
+    }
+
+
+    private void registerTuneURLReceiver(){
+
+        tuneURLReceiver = new TuneURLReceiver();
+
+        IntentFilter intentFilter = new IntentFilter();
+        intentFilter.addAction(SEARCH_FINGERPRINT_RESULT_RECEIVED);
+        intentFilter.addAction(SEARCH_FINGERPRINT_RESULT_ERROR);
+        intentFilter.addAction(ADD_RECORD_OF_INTEREST_RESULT_RECEIVED);
+        intentFilter.addAction(ADD_RECORD_OF_INTEREST_RESULT_ERROR);
+        intentFilter.addAction(POST_POLL_ANSWER_RESULT_RECEIVED);
+        intentFilter.addAction(POST_POLL_ANSWER_RESULT_ERROR);
+        intentFilter.addAction(GET_CYOA_RESULT_RECEIVED);
+        intentFilter.addAction(GET_CYOA_RESULT_ERROR);
+
+        registerReceiver(tuneURLReceiver, intentFilter);
     }
 }

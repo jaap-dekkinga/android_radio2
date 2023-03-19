@@ -4,8 +4,10 @@
     <string name="info_copyright">©2020 Heap Radio</string>
 
     <!-- Radio stream url -->
+    <!--
     <string name="radio" translatable="false">http://uk6.internet-radio.com:8332/;stream</string>
-
+    -->
+    <string name="radio" translatable="false">https://media.rss.com/tuneurl/20211221_031222_b2131da687517bfa7b83fddb801ef5f3.mp3</string>
     <!-- Set auto play when user opens app [ true / false ] -->
     <string name="autoPlayOnAppStart">false</string>
 
