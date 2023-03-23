@@ -7,6 +7,8 @@ import android.content.ServiceConnection;
 import android.os.IBinder;
 import android.util.Log;
 
+import com.dekidea.tuneurl.util.TuneURLManager;
+
 import org.greenrobot.eventbus.EventBus;
 
 public class RadioManager {
@@ -49,6 +51,10 @@ public class RadioManager {
 
     public void bind() {
 
+        System.out.println("bind()");
+
+        TuneURLManager.startTuneURLService(context);
+
         Intent intent = new Intent(context, RadioService.class);
         context.bindService(intent, serviceConnection, Context.BIND_AUTO_CREATE);
 
@@ -57,6 +63,10 @@ public class RadioManager {
     }
 
     public void unbind() {
+
+        System.out.println("unbind()");
+
+        TuneURLManager.stopTuneURLService(context);
 
         context.unbindService(serviceConnection);
         

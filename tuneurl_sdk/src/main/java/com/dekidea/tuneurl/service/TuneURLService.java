@@ -24,16 +24,12 @@ import com.dekidea.tuneurl.util.Constants;
 import com.dekidea.tuneurl.util.TuneURLManager;
 import com.dekidea.tuneurl.util.WakeLocker;
 
-import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.InputStream;
-import java.io.OutputStream;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.nio.channels.Channels;
 import java.nio.channels.ReadableByteChannel;
-import java.util.Calendar;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -437,7 +433,7 @@ public class TuneURLService extends Service implements Constants {
 
 		if(mediaExtractor != null) {
 
-			long startTime = Calendar.getInstance().getTimeInMillis();
+			long startTime = System.currentTimeMillis();
 			long startPlayTime = (long) ((double) mediaExtractor.getSampleTime() / 1000d);
 
 			while (isPlaying) {
@@ -490,24 +486,42 @@ public class TuneURLService extends Service implements Constants {
 
 								break;
 						}
-					}
-				}
 
-				long currentTime = Calendar.getInstance().getTimeInMillis();
-				long currentPlayTime = (long) ((double) mediaExtractor.getSampleTime() / 1000d);
+						long currentTime = System.currentTimeMillis();
+						long currentPlayTime = (long) ((double) mediaExtractor.getSampleTime() / 1000d);
 
-				long timeSpent = currentTime - startTime;
-				long timePlaySpent = currentPlayTime - startPlayTime;
+						long timeSpent = currentTime - startTime;
+						long timePlaySpent = currentPlayTime - startPlayTime;
 
-				if (!recordTuneUrl && (timePlaySpent > (timeSpent + 500))) {
+						if (!recordTuneUrl){
 
-					try {
+							if (timePlaySpent > (timeSpent + 250)){
 
-						Thread.sleep(timePlaySpent - timeSpent);
-					}
-					catch (Exception e) {
+								try {
 
-						e.printStackTrace();
+									System.out.println("Thread.sleep(): " + (timePlaySpent - timeSpent));
+
+									Thread.sleep(timePlaySpent - timeSpent);
+								}
+								catch (Exception e) {
+
+									e.printStackTrace();
+								}
+							}
+							else if(timePlaySpent < (timeSpent - 250)){
+
+								try {
+
+									System.out.println("seekTo(): " + (startPlayTime + timeSpent) * 1000);
+
+									mediaExtractor.seekTo((startPlayTime + timeSpent) * 1000, MediaExtractor.SEEK_TO_PREVIOUS_SYNC);
+								}
+								catch (Exception e) {
+
+									e.printStackTrace();
+								}
+							}
+						}
 					}
 				}
 			}
@@ -621,7 +635,7 @@ public class TuneURLService extends Service implements Constants {
 						start_position_read = start_position_read - windowByteArray.length;
 					}
 
-					long currentTime = Calendar.getInstance().getTimeInMillis();
+					long currentTime = System.currentTimeMillis();
 
 					if((currentTime - lastSearchTime) > 5 * 1000){
 
@@ -908,7 +922,7 @@ public class TuneURLService extends Service implements Constants {
 		i.putExtra(FINGERPRINT, fingerprint_string);
 		startService(i);
 
-		lastSearchTime = Calendar.getInstance().getTimeInMillis();
+		lastSearchTime = System.currentTimeMillis();
 	}
 
 

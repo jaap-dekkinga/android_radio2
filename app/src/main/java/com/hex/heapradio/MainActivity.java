@@ -124,6 +124,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         //Bind Radio
         radioManager = RadioManager.with(this);
 
+        radioManager.bind();
     }
 
     @Override
@@ -147,7 +148,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     protected void onResume() {
         super.onResume();
-        radioManager.bind();
+
     }
 
     @Override
@@ -179,7 +180,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                             if(PlaybackStatus.ISPLAYING){
                                 playOrPause();
                             }*/
-                            radioManager.unbind();
+                            //radioManager.unbind();
                             finish();
                         }
                     }).create().show();

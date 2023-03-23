@@ -57,6 +57,8 @@ import com.hex.heapradio.MainActivity;
 import com.hex.heapradio.R;
 
 import org.greenrobot.eventbus.EventBus;
+
+import java.util.EventListener;
 import java.util.Objects;
 
 public class RadioService extends Service implements Player.EventListener,
@@ -162,6 +164,7 @@ public class RadioService extends Service implements Player.EventListener,
 
     @Override
     public void onCreate() {
+
         super.onCreate();
 
         strAppName = getResources().getString(R.string.app_name);
@@ -212,8 +215,6 @@ public class RadioService extends Service implements Player.EventListener,
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-
-        TuneURLManager.startTuneURLService(getApplicationContext());
 
         String action = intent.getAction();
         if(TextUtils.isEmpty(action))
@@ -274,8 +275,6 @@ public class RadioService extends Service implements Player.EventListener,
         pause();
 
         unregisterReceiver(tuneURLReceiver);
-
-        TuneURLManager.stopTuneURLService(getApplicationContext());
 
         exoPlayer.release();
         exoPlayer.removeListener(this);
@@ -432,7 +431,7 @@ public class RadioService extends Service implements Player.EventListener,
             exoPlayer.prepare(mediaSource);
             exoPlayer.setPlayWhenReady(true);
 
-            TuneURLManager.startScanning(getApplicationContext(), streamUrl, exoPlayer.getCurrentPosition());
+            TuneURLManager.startScanning(this, streamUrl, 0);
         }
         catch (IllegalArgumentException e) {
             e.printStackTrace();
@@ -460,7 +459,7 @@ public class RadioService extends Service implements Player.EventListener,
 
     public void pause() {
 
-        TuneURLManager.stopScanning(getApplicationContext());
+        TuneURLManager.stopScanning(this);
 
         exoPlayer.setPlayWhenReady(false);
 
@@ -470,7 +469,7 @@ public class RadioService extends Service implements Player.EventListener,
 
     public void stop() {
 
-        TuneURLManager.stopScanning(getApplicationContext());
+        TuneURLManager.stopScanning(this);
 
         exoPlayer.stop();
 
