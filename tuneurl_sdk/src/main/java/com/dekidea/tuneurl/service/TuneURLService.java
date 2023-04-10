@@ -230,7 +230,8 @@ public class TuneURLService extends Service implements Constants {
 
 		Intent i = new Intent();
 
-		PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, i, PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
+		PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, i,
+				PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
 
 		// Create the Foreground Service
 		NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
@@ -724,7 +725,7 @@ public class TuneURLService extends Service implements Constants {
 
 				System.out.println("TuneURL - similarity: " + String.format("%.2f",mSimilarity));
 
-				if (mSimilarity > SIMILARITY_THRESHOLD && mSimilarity <= mLastSimilarity) {
+				if (mSimilarity == 1 || (mSimilarity > SIMILARITY_THRESHOLD && mSimilarity <= mLastSimilarity)) {
 
 					mLastSimilarity = 0;
 					recordTuneUrl = true;

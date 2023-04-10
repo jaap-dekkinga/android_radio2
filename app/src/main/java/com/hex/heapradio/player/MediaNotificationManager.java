@@ -68,7 +68,7 @@ public class MediaNotificationManager {
         mIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
         mIntent.setAction(Intent.ACTION_MAIN);
         mIntent.addCategory(Intent.CATEGORY_LAUNCHER);
-        pi = PendingIntent.getActivity(service, NOTIFICATION_ID, mIntent, PendingIntent.FLAG_CANCEL_CURRENT);
+        pi = PendingIntent.getActivity(service, NOTIFICATION_ID, mIntent, PendingIntent.FLAG_CANCEL_CURRENT | PendingIntent.FLAG_IMMUTABLE);
 
         notificationManager.cancel(NOTIFICATION_ID);
 
@@ -107,17 +107,17 @@ public class MediaNotificationManager {
 
         Intent stop = new Intent(service, RadioService.class);
         stop.setAction(RadioService.ACTION_STOP);
-        PendingIntent pStop = PendingIntent.getService(service, NOTIFICATION_ID, stop,0);
+        PendingIntent pStop = PendingIntent.getService(service, NOTIFICATION_ID, stop, PendingIntent.FLAG_MUTABLE);
         view.setOnClickPendingIntent(R.id.btnCancel, pStop);
 
         Intent play = new Intent(service, RadioService.class);
         play.setAction(RadioService.ACTION_PLAY);
-        PendingIntent pPlay = PendingIntent.getService(service, NOTIFICATION_ID, play, 0);
+        PendingIntent pPlay = PendingIntent.getService(service, NOTIFICATION_ID, play, PendingIntent.FLAG_MUTABLE);
         view.setOnClickPendingIntent(R.id.btnPlay, pPlay);
 
         Intent pause = new Intent(service, RadioService.class);
         pause.setAction(RadioService.ACTION_PAUSE);
-        PendingIntent pPause = PendingIntent.getService(service, NOTIFICATION_ID, pause, 0);
+        PendingIntent pPause = PendingIntent.getService(service, NOTIFICATION_ID, pause, PendingIntent.FLAG_MUTABLE);
         view.setOnClickPendingIntent(R.id.btnStop, pPause);
     }
 

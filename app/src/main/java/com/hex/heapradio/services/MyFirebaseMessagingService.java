@@ -46,7 +46,8 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         //On click of notification it redirect to this Activity
         Intent intent = new Intent(this, MainActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_ONE_SHOT);
+        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent,
+                PendingIntent.FLAG_ONE_SHOT | PendingIntent.FLAG_IMMUTABLE);
         Uri soundUri= RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
         String channelId = getString(R.string.firebase_notification_channel_id);
         NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this,channelId)

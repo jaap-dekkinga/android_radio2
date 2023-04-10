@@ -553,7 +553,7 @@ public class RadioService extends Service implements Player.EventListener,
         mIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
         mIntent.setAction(Intent.ACTION_MAIN);
         mIntent.addCategory(Intent.CATEGORY_LAUNCHER);
-        pi = PendingIntent.getActivity(this, NOTIFICATION_ID, mIntent, PendingIntent.FLAG_CANCEL_CURRENT);
+        pi = PendingIntent.getActivity(this, NOTIFICATION_ID, mIntent, PendingIntent.FLAG_CANCEL_CURRENT | PendingIntent.FLAG_IMMUTABLE);
 
         //cancelNotify(NOTIFICATION_ID);
 
@@ -592,17 +592,17 @@ public class RadioService extends Service implements Player.EventListener,
 
         Intent stop = new Intent(this, RadioService.class);
         stop.setAction(RadioService.ACTION_STOP);
-        PendingIntent pStop = PendingIntent.getService(this, NOTIFICATION_ID, stop,0);
+        PendingIntent pStop = PendingIntent.getService(this, NOTIFICATION_ID, stop,PendingIntent.FLAG_MUTABLE);
         view.setOnClickPendingIntent(R.id.btnCancel, pStop);
 
         Intent play = new Intent(this, RadioService.class);
         play.setAction(RadioService.ACTION_PLAY);
-        PendingIntent pPlay = PendingIntent.getService(this, NOTIFICATION_ID, play, 0);
+        PendingIntent pPlay = PendingIntent.getService(this, NOTIFICATION_ID, play, PendingIntent.FLAG_MUTABLE);
         view.setOnClickPendingIntent(R.id.btnPlay, pPlay);
 
         Intent pause = new Intent(this, RadioService.class);
         pause.setAction(RadioService.ACTION_PAUSE);
-        PendingIntent pPause = PendingIntent.getService(this, NOTIFICATION_ID, pause, 0);
+        PendingIntent pPause = PendingIntent.getService(this, NOTIFICATION_ID, pause, PendingIntent.FLAG_MUTABLE);
         view.setOnClickPendingIntent(R.id.btnStop, pPause);
     }
 
