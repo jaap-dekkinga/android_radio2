@@ -1,11 +1,14 @@
 package com.hex.heapradio;
 
+import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.ActivityNotFoundException;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.net.ConnectivityManager;
 import android.net.NetworkCapabilities;
 import android.net.NetworkInfo;
@@ -13,6 +16,8 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 
+import android.os.PowerManager;
+import android.provider.Settings;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.Gravity;
@@ -26,6 +31,7 @@ import com.google.android.material.navigation.NavigationView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.core.content.ContextCompat;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
@@ -43,7 +49,6 @@ import com.google.android.gms.ads.AdView;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.iid.InstanceIdResult;
-import com.hex.heapradio.player.MediaNotificationManager;
 import com.hex.heapradio.player.PlaybackStatus;
 import com.hex.heapradio.player.RadioManager;
 import com.hex.heapradio.player.RadioService;
@@ -55,6 +60,9 @@ import org.greenrobot.eventbus.ThreadMode;
 import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, HomeFragment.SendMessages {
+
+    private static final int PERMISSIONS_REQUEST = 1338;
+
     // index to identify current nav menu item
     public static int navItemIndex = 0;
     public static int navPrevIndex = 0;
@@ -121,10 +129,16 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             mAdView.loadAd(adRequest);
         }
 
-        //Bind Radio
-        radioManager = RadioManager.with(this);
 
-        radioManager.bind();
+        if(PackageManager.PERMISSION_GRANTED ==
+                ContextCompat.checkSelfPermission(MainActivity.this, Manifest.permission.READ_PHONE_STATE) ||
+                PackageManager.PERMISSION_GRANTED ==
+                        ContextCompat.checkSelfPermission(MainActivity.this, Manifest.permission.CALL_PHONE)){
+            //Bind Radio
+            radioManager = RadioManager.with(this);
+
+            radioManager.bind();
+        }
     }
 
     @Override
@@ -142,13 +156,19 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        radioManager.unbind();
+
+        if(radioManager != null) {
+
+            radioManager.unbind();
+        }
     }
 
     @Override
     protected void onResume() {
+
         super.onResume();
 
+        checkPermissions();
     }
 
     @Override
@@ -532,7 +552,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         if(!PlaybackStatus.ISPLAYING && Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
             startForegroundService(new Intent(this,RadioService.class));
         }
-        radioManager.playOrPause(getString(R.string.radio));
+
+        if(radioManager != null) {
+
+            radioManager.playOrPause(getString(R.string.radio));
+        }
     }
 
     public void changeButton() {
@@ -575,13 +599,80 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     public void autoPlay(){
-        if (getString(R.string.autoPlayOnAppStart).equalsIgnoreCase("true") && !appStarted) {
-            if (TextUtils.isEmpty(getResources().getString(R.string.radio))) return;
-            if(!PlaybackStatus.ISPLAYING && Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
-                startForegroundService(new Intent(this,RadioService.class));
+
+        if(radioManager != null) {
+
+            if (getString(R.string.autoPlayOnAppStart).equalsIgnoreCase("true") && !appStarted) {
+                if (TextUtils.isEmpty(getResources().getString(R.string.radio))) return;
+                if (!PlaybackStatus.ISPLAYING && Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                    startForegroundService(new Intent(this, RadioService.class));
+                }
+                radioManager.getService().playOrPause(getResources().getString(R.string.radio));
+                appStarted = true;
             }
-            radioManager.getService().playOrPause(getResources().getString(R.string.radio));
-            appStarted=true;
+        }
+    }
+
+
+    private void checkPermissions() {
+
+        try {
+
+            if (!android.provider.Settings.canDrawOverlays(MainActivity.this)) {
+
+                Intent intent = new Intent(android.provider.Settings.ACTION_MANAGE_OVERLAY_PERMISSION,
+                        Uri.parse("package:" + getPackageName()));
+
+                startActivity(intent);
+            }
+            else if(PackageManager.PERMISSION_GRANTED !=
+                    ContextCompat.checkSelfPermission(MainActivity.this, Manifest.permission.READ_PHONE_STATE) ||
+                    PackageManager.PERMISSION_GRANTED !=
+                            ContextCompat.checkSelfPermission(MainActivity.this, Manifest.permission.CALL_PHONE)){
+
+                requestPermissions(new String[]{Manifest.permission.READ_PHONE_STATE, Manifest.permission.CALL_PHONE}, PERMISSIONS_REQUEST);
+            }
+            else if (!((PowerManager) getSystemService(POWER_SERVICE)).
+                    isIgnoringBatteryOptimizations(getPackageName())) {
+
+                Intent intent = new Intent();
+
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                intent.setAction(Settings.ACTION_IGNORE_BATTERY_OPTIMIZATION_SETTINGS);
+                intent.setData(Uri.parse("package:" + getPackageName()));
+
+                startActivity(intent);
+            }
+        }
+        catch (Exception e){
+
+            e.printStackTrace();
+        }
+    }
+
+
+    @SuppressLint("NewApi")
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+
+        switch (requestCode) {
+
+            case PERMISSIONS_REQUEST:
+
+                if(PackageManager.PERMISSION_GRANTED ==
+                        ContextCompat.checkSelfPermission(MainActivity.this, Manifest.permission.READ_PHONE_STATE) ||
+                        PackageManager.PERMISSION_GRANTED ==
+                                ContextCompat.checkSelfPermission(MainActivity.this, Manifest.permission.CALL_PHONE)){
+
+                    //Bind Radio
+                    radioManager = RadioManager.with(this);
+
+                    radioManager.bind();
+                }
+
+                break;
         }
     }
 }
